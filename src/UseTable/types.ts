@@ -88,6 +88,16 @@ export type StoreColumn = {
 };
 
 /**
+ * A Row derivative that applies NoSerialize to functions in order
+ * for them to be safely placed in store.
+ */
+export type StoreRow<T> = {
+  original: T,
+  cells: StoreColumn[]
+};
+
+
+/**
  * A HeaderDef derivative that applies NoSerialize to functions in order
  * for them to be safely placed in store.
  */

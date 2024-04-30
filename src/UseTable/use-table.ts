@@ -5,6 +5,7 @@ import type {
   StoreColumn,
   StoreHeaderDef,
   SortBy,
+  StoreRow,
 } from "./types";
 import { applySortListeners } from "./utils";
 import { useSort } from "./use-sort";
@@ -66,7 +67,7 @@ export const useTable = <TData extends TableData>({
    * Array of arrays that represent table rows and columns. This
    * is the result of {@link TData} and {@link getColumnDefs$}.
    */
-  const rowGroups = useSignal<StoreColumn[][]>();
+  const rowGroups = useSignal<StoreRow<TData>[]>();
 
   /**
    * Array of table header ({@link StoreHeaderDef}) columns.

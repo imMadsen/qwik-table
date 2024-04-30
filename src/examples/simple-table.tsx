@@ -70,7 +70,7 @@ export default component$(() => {
         <tbody>
           {table.rowGroups.value?.map((row, i) => (
             <tr key={i + "row"}>
-              {row.map((cell) => (
+              {row.cells.map((cell) => (
                 <td key={cell.id}>
                   <div data-test-id={cell.value}>{flexRender(cell.cell)}</div>
                 </td>

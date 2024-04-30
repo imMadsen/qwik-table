@@ -4,6 +4,7 @@ import type {
   SortBy,
   StoreColumn,
   StoreHeaderDef,
+  StoreRow,
   TableData,
 } from "./types";
 import { deriveColumnsFromColumnDefs, deriveHeaders } from "./utils";
@@ -24,7 +25,7 @@ export const useTableCreator = <TData extends TableData>({
   internalState: Signal<TData[] | undefined | null>;
   data: Signal<TData[] | undefined | null>;
   getColumnDefs$: QRL<() => ColumnDefs<TData>>;
-  rowGroups: Signal<StoreColumn[][] | undefined>;
+  rowGroups: Signal<StoreRow<TData>[] | undefined>;
   headerGroups: Signal<StoreHeaderDef[] | undefined>;
   fallback: string;
 }) => {
@@ -42,24 +43,30 @@ export const useTableCreator = <TData extends TableData>({
 
     if (!columnDefs) return;
 
-    const rows: StoreColumn[][] = [];
+    const rows: StoreRow<TData>[] = [];
 
     /**
      * Uses internalState as it can be modified/sorted.
      */
     for (let i = 0; i < internalState.value.length; i++) {
       for (let j = 0; j < columnDefs.length; j++) {
+        // A reference to the "row" in the data
+        const original = data.value[i];
+
         const column = deriveColumnsFromColumnDefs(
           columnDefs[j],
-          data.value[i],
+          original,
           `${i}-${j}`,
           fallback,
         );
 
         if (!rows[i]) {
-          rows[i] = [];
+          rows[i] = {
+            original,
+            cells: [],
+          };
         }
-        rows[i].push(column);
+        rows[i].cells.push(column)
       }
     }
 
