@@ -2,7 +2,6 @@ import { useSignal, useTask$, useVisibleTask$ } from "@builder.io/qwik";
 import type {
   TableData,
   TableOptions,
-  StoreColumn,
   StoreHeaderDef,
   SortBy,
   StoreRow,

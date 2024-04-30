@@ -1,4 +1,4 @@
-import type { Signal, QRL, JSXNode, NoSerialize } from "@builder.io/qwik";
+import type { Signal, QRL, JSXNode, NoSerialize, JSXOutput } from "@builder.io/qwik";
 
 export type SortBy = { [key: string]: "asc" | "desc" } | undefined;
 
@@ -13,9 +13,9 @@ export type HeaderArgs = {
   id?: string;
 };
 
-type HeaderFn = (props: HeaderArgs) => JSXNode | Serializable | Element;
+type HeaderFn = (props: HeaderArgs) => JSXNode | JSXOutput | Serializable | Element;
 
-type CellFn<T> = (info: T) => JSXNode | Serializable | Element;
+type CellFn<T> = (info: T) => JSXNode | JSXOutput | Serializable | Element;
 
 export type ColumnDef<TData extends TableData> =
   | {
@@ -72,8 +72,8 @@ export type TableOptions<TData extends TableData> = {
 };
 
 export type Column = {
-  value?: JSXNode | Serializable;
-  cell?: JSXNode | Serializable;
+  value?: JSXNode | JSXOutput | Serializable;
+  cell?: JSXNode | JSXOutput | Serializable;
   id: string;
 };
 
@@ -82,8 +82,8 @@ export type Column = {
  * for them to be safely placed in store.
  */
 export type StoreColumn = {
-  value?: NoSerialize<() => JSXNode | Serializable | Element> | Serializable;
-  cell?: NoSerialize<() => JSXNode | Serializable | Element> | Serializable;
+  value?: NoSerialize<() => JSXNode | JSXOutput | Serializable | Element> | Serializable;
+  cell?: NoSerialize<() => JSXNode | JSXOutput | Serializable | Element> | Serializable;
   id: string;
 };
 
@@ -102,7 +102,7 @@ export type StoreRow<T> = {
  * for them to be safely placed in store.
  */
 export type StoreHeaderDef = {
-  cell: NoSerialize<() => JSXNode | Serializable | Element> | Serializable;
+  cell: NoSerialize<() => JSXNode | JSXOutput | Serializable | Element> | Serializable;
   id?: string;
 };
 

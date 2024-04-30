@@ -2,7 +2,6 @@ import { type QRL, type Signal, useTask$ } from "@builder.io/qwik";
 import type {
   ColumnDefs,
   SortBy,
-  StoreColumn,
   StoreHeaderDef,
   StoreRow,
   TableData,

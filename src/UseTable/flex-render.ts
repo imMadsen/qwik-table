@@ -1,4 +1,4 @@
-import type { NoSerialize, JSXChildren, JSXNode } from "@builder.io/qwik";
+import type { NoSerialize, JSXChildren, JSXNode, JSXOutput } from "@builder.io/qwik";
 import type { Serializable } from "./types";
 
 /**
@@ -14,7 +14,7 @@ export const flexRender = (
     | string
     | number
     | undefined
-    | NoSerialize<() => JSXNode | Element | Serializable>,
+    | NoSerialize<() => JSXNode | JSXOutput | Element | Serializable>,
 ): JSXChildren | string => {
   if (typeof arg === "function" || typeof arg === "object") {
     try {
